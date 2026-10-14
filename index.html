@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ibrahim Yebo Goshie | Aspiring AI Engineer, Backend Foundations</title>
+<meta name="description" content="Portfolio of Ibrahim Yebo Goshie, an aspiring AI engineer building secure, tested backend foundations. Featuring DocuChat, a Python and FastAPI backend with PostgreSQL, JWT authentication and automated tests.">
+<meta property="og:title" content="Ibrahim Yebo Goshie | Aspiring AI Engineer">
+<meta property="og:description" content="Build it. Document it. Show your work. A backend and AI engineering portfolio with a documented case study and code to inspect.">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" id="themeColorMeta" content="#0A141C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230A141C'/%3E%3Csvg x='10' y='14' width='44' height='36' viewBox='385 410 314 258' fill='%236EC4D1'%3E%3Cpath d=%22M386 411.5 L480 505.5 L456.2 530 L417 491.8 V667 H386 Z%22/%3E%3Cpath d=%22M698 411.5 L604 505.5 L627.8 530 L667 491.8 V667 H698 Z%22/%3E%3Cpath d=%22M445 411 H488.5 L603.6 526.5 L590 533 L541 513 L532.5 499 Z%22/%3E%3Cpath fill-rule=%22evenodd%22 d=%22M625.4 583.2 A84 84 0 1 0 457.4 583.2 A84 84 0 1 0 625.4 583.2 Z M595.1 583.2 A53.7 53.7 0 1 1 487.7 583.2 A53.7 53.7 0 1 1 595.1 583.2 Z%22/%3E%3C/svg%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+/* Apply the saved theme before first paint. Default is dark. */
+(function () {
+  var t = 'dark';
+  try { t = localStorage.getItem('ai-portfolio-theme') || 'dark'; } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+})();
+</script>
+<style>
+/* ==========================================================================
+   IBRAHIM YEBO GOSHIE — AI ENGINEERING PORTFOLIO
+   Contents
+     1. Tokens (colors, type, spacing) — light + dark
+     2. Base + atmosphere (gradient backdrop, grain)
+     3. Layout helpers, buttons, links, pending-link state
+     4. Navigation
+     5. Hero (type, trace card, dot field)
+     6. Stack marquee + evidence index
+     7. Section headings, About, Skills
+     8. Projects
+     9. Case study (side nav, flows, tables, RBAC, evidence)
+    10. AI engineering evidence
+    11. GitHub, Learning journey, Contact, Footer
+    12. Responsive + reduced motion
+   ========================================================================== */
+
+/* 1. TOKENS ---------------------------------------------------------------- */
+:root {
+  --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans:  'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --bg:        #F3F7F9;
+  --bg-deep:   #E9F0F4;
+  --panel:     rgba(255, 255, 255, 0.62);
+  --panel-hi:  rgba(255, 255, 255, 0.86);
+  --line:      rgba(18, 38, 52, 0.13);
+  --line-hi:   rgba(18, 38, 52, 0.26);
+  --text:      #12212C;
+  --muted:     #4A6070;
+  --accent:    #0B7F8C;       /* teal, AA on light */
+  --accent-ink:#06555F;
+  --accent-bg: rgba(11, 127, 140, 0.10);
+  --warm:      #9A6212;       /* "in progress" */
+  --warm-bg:   rgba(154, 98, 18, 0.11);
+  --plan:      #5B6E7C;       /* "planned" */
+  --on-accent: #FFFFFF;
+  --solid:     #12212C;       /* solid buttons */
+  --on-solid:  #F3F7F9;
+  --dot:       rgba(18, 38, 52, 0.20);
+  --dot-hot:   #0B7F8C;
+  --glass-shadow: 0 10px 34px rgba(18, 38, 52, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --orb-1: rgba(110, 196, 209, 0.30);
+  --orb-2: rgba(99, 139, 190, 0.20);
+  --orb-3: rgba(150, 190, 235, 0.20);
+  --grain-opacity: 0.16;
+  --grain-blend: normal;
+  --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.09 0 0 0 0 0.16 0 0 0 0 0.22 2.2 0 0 0 -0.9'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  --max: 1180px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --r-lg: 18px;
+  --r-md: 12px;
+  --r-sm: 7px;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg:        #0A141C;
+  --bg-deep:   #07101A;
+  --panel:     rgba(255, 255, 255, 0.045);
+  --panel-hi:  rgba(255, 255, 255, 0.085);
+  --line:      rgba(160, 205, 225, 0.14);
+  --line-hi:   rgba(160, 205, 225, 0.30);
+  --text:      #E6EFF3;
+  --muted:     #96AEBC;
+  --accent:    #6EC4D1;
+  --accent-ink:#9EDDE6;
+  --accent-bg: rgba(110, 196, 209, 0.12);
+  --warm:      #E5B567;
+  --warm-bg:   rgba(229, 181, 103, 0.12);
+  --plan:      #8398A6;
+  --on-accent: #07202A;
+  --solid:     #E6EFF3;
+  --on-solid:  #0A141C;
+  --dot:       rgba(160, 205, 225, 0.20);
+  --dot-hot:   #6EC4D1;
+  --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --orb-1: rgba(110, 196, 209, 0.16);
+  --orb-2: rgba(99, 139, 190, 0.16);
+  --orb-3: rgba(70, 100, 190, 0.14);
+  --grain-opacity: 0.85;
+  --grain-blend: soft-light;
+  --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+
+/* 2. BASE + ATMOSPHERE ------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure, pre { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+a { color: var(--accent-ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+
+body::before, body::after, html::after { content: ""; position: fixed; pointer-events: none; z-index: -1; }
+body::before {
+  inset: 0;
+  background:
+    radial-gradient(44vmax 44vmax at 8% 4%,  var(--orb-1), transparent 62%),
+    radial-gradient(48vmax 48vmax at 96% 38%, var(--orb-2), transparent 62%),
+    radial-gradient(54vmax 54vmax at 24% 100%, var(--orb-3), transparent 62%);
+}
+body::after {
+  width: 34vmax; height: 34vmax; top: 40%; left: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--orb-1), transparent 68%);
+  filter: blur(40px);
+  animation: orb-drift 30s ease-in-out infinite alternate;
+}
+html::after {
+  inset: 0;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
+  background-image: var(--grain-image);
+  background-size: 240px 240px;
+}
+@keyframes orb-drift { to { transform: translate(-20vmax, 12vmax) scale(1.2); } }
+
+.skip { position: absolute; left: 16px; top: -120px; z-index: 100; padding: 10px 16px; border-radius: var(--r-sm); background: var(--solid); color: var(--on-solid); font-weight: 600; }
+.skip:focus { top: 12px; }
+.progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 90; }
+.progress span { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+
+/* 3. LAYOUT HELPERS, BUTTONS, LINKS ---------------------------------------- */
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding: clamp(72px, 9vw, 132px) 0 0; }
+.section:last-of-type { padding-bottom: clamp(72px, 9vw, 120px); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 0 22px;
+  font: 600 0.95rem/1 var(--sans);
+  color: var(--text); text-decoration: none; cursor: pointer;
+  border: 1px solid var(--line-hi); border-radius: 999px;
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  transition: background 160ms, border-color 160ms, color 160ms, transform 160ms;
+}
+.btn:hover { border-color: var(--accent); color: var(--text); background: var(--panel-hi); }
+.btn:active { transform: translateY(1px); }
+.btn--solid { background: var(--solid); border-color: var(--solid); color: var(--on-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.btn--solid:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn svg { width: 16px; height: 16px; }
+
+/* Links that have not been filled in yet (see LINKS in the script) */
+.is-pending {
+  cursor: not-allowed;
+  border-style: dashed !important;
+  opacity: 0.62;
+  text-decoration: none !important;
+}
+.is-pending:hover { background: var(--panel); border-color: var(--line-hi); }
+.btn--solid.is-pending { background: transparent; color: var(--text); border-color: var(--line-hi); }
+.btn--solid.is-pending:hover { background: transparent; color: var(--text); border-color: var(--line-hi); }
+.textlink { font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--line-hi); padding-bottom: 1px; }
+.textlink:hover { border-bottom-color: var(--accent); }
+.textlink.is-pending { border-bottom-style: dashed; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 3px 11px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 500; line-height: 1.5;
+  border: 1px solid var(--line); color: var(--muted); background: var(--panel);
+}
+.tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.tag--done { color: var(--accent-ink); border-color: color-mix(in srgb, var(--accent) 45%, transparent); background: var(--accent-bg); }
+.tag--wip  { color: var(--warm); border-color: color-mix(in srgb, var(--warm) 45%, transparent); background: var(--warm-bg); }
+.tag--plan { color: var(--plan); border-style: dashed; }
+.tag--plan::before { background: transparent; border: 1.5px dashed currentColor; width: 8px; height: 8px; }
+.tag--wip::before { background: linear-gradient(90deg, currentColor 50%, transparent 50%); border: 1.5px solid currentColor; width: 8px; height: 8px; }
+
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+.path { font-family: var(--mono); font-size: 0.86em; color: var(--accent-ink); }
+
+/* 4. NAVIGATION ------------------------------------------------------------ */
+.nav { position: sticky; top: 0; z-index: 80; border-bottom: 1px solid transparent; transition: background 200ms, border-color 200ms, backdrop-filter 200ms; }
+.nav.scrolled {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border-bottom-color: var(--line);
+  -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%);
+}
+.nav__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
+.nav__brand { font-family: var(--serif); font-weight: 450; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1; color: var(--text); text-decoration: none; white-space: nowrap; }
+.nav__brand:hover { color: var(--accent); }
+.nav__links { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 34px); }
+.nav__links a:not(.btn) { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.94rem; padding: 6px 0; border-bottom: 1.5px solid transparent; }
+.nav__links a:not(.btn):hover, .nav__links a[aria-current="true"] { color: var(--text); border-bottom-color: var(--accent); }
+.nav__links .btn { min-height: 40px; padding: 0 18px; font-size: 0.9rem; }
+.nav__tools { display: flex; align-items: center; gap: 10px; }
+.icon-btn { display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-hi); background: var(--panel); color: var(--text); cursor: pointer; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: background 160ms, border-color 160ms; }
+.icon-btn:hover { background: var(--panel-hi); border-color: var(--accent); }
+.icon-btn svg { width: 19px; height: 19px; }
+.theme-sun { display: none; }
+:root[data-theme="dark"] .theme-sun { display: block; }
+:root[data-theme="dark"] .theme-moon { display: none; }
+.nav__toggle { display: none; }
+
+/* 5. HERO ------------------------------------------------------------------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  -webkit-mask-image: linear-gradient(100deg, rgba(0,0,0,0.25) 0%, #000 55%);
+  mask-image: linear-gradient(100deg, rgba(0,0,0,0.25) 0%, #000 55%);
+}
+.hero__in { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(32px, 5vw, 72px); align-items: center; padding-top: clamp(44px, 7vw, 96px); padding-bottom: clamp(56px, 8vw, 110px); }
+.status { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 12px; margin-bottom: 26px; border: 1px solid var(--line-hi); border-radius: 999px; background: var(--panel); font-size: 0.88rem; font-weight: 500; color: var(--muted); text-decoration: none; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.status:hover { color: var(--text); border-color: var(--accent); }
+.status__dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--warm); }
+.status__dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--warm); animation: ping 2.8s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: 0.9; } 70%, 100% { transform: scale(3.4); opacity: 0; } }
+
+.hero__name { font-weight: 600; font-size: 1rem; letter-spacing: 0.01em; margin-bottom: 10px; }
+.hero__name span { color: var(--muted); font-weight: 400; }
+h1.display {
+  font-family: var(--serif); font-weight: 350; font-optical-sizing: auto;
+  font-size: clamp(2.5rem, 0.9rem + 4.7vw, 5rem);
+  line-height: 1; letter-spacing: -0.035em;
+}
+h1.display .line { display: block; white-space: nowrap; opacity: 0; transform: translateY(18px); animation: line-in 700ms cubic-bezier(.2,.7,.2,1) forwards; }
+h1.display .line:nth-child(1) { animation-delay: 80ms; }
+h1.display .line:nth-child(2) { animation-delay: 260ms; padding-left: 0.4em; }
+h1.display .line:nth-child(3) { animation-delay: 440ms; padding-left: 0.8em; }
+@keyframes line-in { to { opacity: 1; transform: none; } }
+.lead { max-width: 33em; margin-top: 30px; font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem); color: var(--muted); }
+.lead strong { color: var(--text); font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+/* Hero trace card: DocuChat's real request path, with a pulse travelling down it */
+.trace { position: relative; padding: 22px 22px 18px; border: 1px solid var(--line-hi); border-radius: var(--r-lg); background: var(--panel); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%); }
+.trace__head { display: grid; gap: 2px; padding-bottom: 14px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+.trace__head h2 { font: 600 0.98rem/1.2 var(--sans); }
+.trace__head span { font-size: 0.82rem; color: var(--muted); }
+.trace__list { position: relative; counter-reset: layer; --step: 56px; }
+.trace__list::before { content: ""; position: absolute; left: 11px; top: 26px; bottom: 26px; width: 1px; background: var(--line-hi); }
+.trace__list::after {
+  content: ""; position: absolute; left: 7px; top: 22px; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: pulse-down 6s cubic-bezier(.45,.05,.55,.95) infinite;
+}
+@keyframes pulse-down { 0% { transform: translateY(0); opacity: 0; } 6% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateY(calc(var(--step) * 5)); opacity: 0; } }
+.trace__list li { position: relative; display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; align-items: center; height: var(--step); }
+.trace__list li::before { content: ""; width: 9px; height: 9px; margin-left: 7px; border-radius: 50%; border: 1.5px solid var(--line-hi); background: var(--bg); animation: node-lit 6s linear infinite; animation-delay: calc(var(--i) * 1.05s - 0.1s); }
+@keyframes node-lit { 0%, 12% { border-color: var(--accent); background: var(--accent); } 20%, 100% { border-color: var(--line-hi); background: var(--bg); } }
+.trace__list b { display: block; font-size: 0.95rem; font-weight: 600; line-height: 1.25; }
+.trace__list small { display: block; font-size: 0.8rem; color: var(--muted); line-height: 1.3; }
+.trace__foot { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; margin-top: 8px; border-top: 1px solid var(--line); }
+
+/* 6. STACK MARQUEE + EVIDENCE INDEX ----------------------------------------- */
+.marquee-wrap { padding: 22px 0 24px; border-bottom: 1px solid var(--line); overflow: hidden; }
+.marquee-wrap p { font-size: 0.88rem; color: var(--muted); margin-bottom: 12px; }
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee__track { display: flex; width: max-content; animation: slide 60s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee ul { display: flex; gap: 10px; padding-right: 10px; }
+.marquee li { white-space: nowrap; padding: 7px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-weight: 500; font-size: 0.95rem; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+.index { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+.index a { display: block; padding: 26px clamp(18px, 2.4vw, 32px); text-decoration: none; color: var(--text); border-left: 1px solid var(--line); transition: background 160ms; }
+.index a:first-child { border-left: 0; }
+.index a:hover { background: var(--panel); color: var(--text); }
+.index b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.3rem; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 6px; }
+.index span { display: block; font-size: 0.9rem; color: var(--muted); line-height: 1.45; }
+.index em { display: inline-block; margin-top: 10px; font-style: normal; font-size: 0.86rem; font-weight: 600; color: var(--accent-ink); }
+
+/* 7. SECTION HEADINGS, ABOUT, SKILLS ---------------------------------------- */
+.head { max-width: 46rem; margin-bottom: clamp(32px, 4vw, 52px); }
+.head--split { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 80px); align-items: end; }
+h2.title { font-family: var(--serif); font-weight: 380; font-optical-sizing: auto; font-size: clamp(2rem, 1.3rem + 2.6vw, 3.4rem); line-height: 1.05; letter-spacing: -0.03em; }
+.head p { color: var(--muted); margin-top: 18px; max-width: 38em; }
+.head--split p { margin-top: 0; }
+h3.sub { font: 600 1.05rem/1.3 var(--sans); letter-spacing: -0.005em; margin-bottom: 10px; }
+
+.about { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.prose p { max-width: 36em; color: var(--muted); }
+.prose p + p { margin-top: 1.15em; }
+.prose p:first-child { color: var(--text); font-size: 1.12em; }
+.aside { display: grid; gap: 18px; }
+.callout { padding: 24px 26px; border-radius: var(--r-lg); border: 1px solid var(--line-hi); background: var(--panel); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.callout h3 { font: 600 0.95rem/1.3 var(--sans); color: var(--muted); margin-bottom: 8px; }
+.callout p { font-family: var(--serif); font-size: 1.32rem; line-height: 1.3; letter-spacing: -0.015em; }
+.callout--quiet { background: transparent; box-shadow: none; border-style: dashed; border-color: var(--line); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.callout--quiet p { font-family: var(--sans); font-size: 0.97rem; line-height: 1.6; color: var(--muted); letter-spacing: 0; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-bottom: 26px; }
+.skills { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.skill { grid-column: span 4; padding: 24px 26px 22px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.skill--7 { grid-column: span 7; } .skill--5 { grid-column: span 5; } .skill--3 { grid-column: span 3; } .skill--6 { grid-column: span 6; }
+.skill h3 { font: 600 1.02rem/1.3 var(--sans); margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.skill ul { display: grid; gap: 7px 22px; }
+.skill--7 ul, .skill--6 ul, .skill--8 ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.skill li { position: relative; padding-left: 16px; font-size: 0.96rem; line-height: 1.45; }
+.skill li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.skill li.wip::before { background: linear-gradient(90deg, var(--warm) 50%, transparent 50%); border: 1.5px solid var(--warm); width: 8px; height: 8px; top: 0.5em; }
+.skill li.plan { color: var(--muted); }
+.skill li.plan::before { background: transparent; border: 1.5px dashed var(--plan); width: 8px; height: 8px; top: 0.5em; }
+.skill li small { display: block; color: var(--warm); font-size: 0.8rem; font-weight: 500; }
+.skill hr { border: 0; border-top: 1px dashed var(--line-hi); margin: 18px 0 14px; }
+.skill .fine { font-size: 0.86rem; color: var(--muted); margin-top: 14px; line-height: 1.5; }
+
+/* To-do placeholders: anything still to be filled in */
+.todo { padding: 14px 16px; border: 1px dashed var(--warm); border-radius: var(--r-sm); background: var(--warm-bg); color: var(--text); font-size: 0.93rem; line-height: 1.5; }
+.todo::before { content: "To add"; display: inline-block; margin-right: 10px; padding: 1px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 600; color: var(--on-accent); background: var(--warm); }
+:root[data-theme="dark"] .todo::before { color: #1D1405; }
+
+/* 8. PROJECTS --------------------------------------------------------------- */
+.projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.project { display: flex; flex-direction: column; padding: clamp(26px, 3vw, 40px); border: 1px solid var(--line-hi); border-radius: var(--r-lg); background: var(--panel); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%); }
+.project__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.project__kind { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
+.project h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); line-height: 1.08; letter-spacing: -0.025em; }
+.project__lede { margin-top: 14px; color: var(--muted); max-width: 40em; }
+.project dl { display: grid; gap: 0; margin: 26px 0 22px; border-top: 1px solid var(--line); }
+.project dl > div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.project dt { font-weight: 600; font-size: 0.92rem; }
+.project dd { color: var(--muted); font-size: 0.97rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chips li { padding: 3px 12px; border: 1px solid var(--line-hi); border-radius: var(--r-sm); font-size: 0.86rem; font-weight: 500; background: var(--panel); color: var(--text); }
+.project__links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: auto; padding-top: 22px; }
+.project--group { border-style: dashed; background: transparent; box-shadow: none; }
+.project--group h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); color: var(--muted); }
+.project--group .todo + .todo { margin-top: 10px; }
+.project--group .stack-todo { margin: 18px 0 4px; display: grid; gap: 10px; }
+
+/* Project 2 detail layout */
+.gp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); margin-top: 30px; padding-top: 28px; border-top: 1px solid var(--line); }
+.gp h4, .trio h4 { font: 600 0.98rem/1.3 var(--sans); margin-bottom: 10px; }
+.gp p { color: var(--muted); font-size: 0.97rem; max-width: 38em; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+.trio .bullets { margin-top: 12px; gap: 8px; }
+.trio .bullets li { font-size: 0.93rem; }
+.trio .bullets b { color: var(--text); font-weight: 600; }
+.todo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 28px; }
+
+/* Skill grid extras */
+.skill--8 { grid-column: span 8; }
+.skill--12 { grid-column: 1 / -1; }
+.skill__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 40px; }
+.evidence .path small { font-family: var(--sans); color: var(--muted); }
+
+/* 9. CASE STUDY ------------------------------------------------------------- */
+.cs { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.cs__nav { position: sticky; top: 100px; }
+.cs__nav p { font-size: 0.86rem; color: var(--muted); margin-bottom: 12px; }
+.cs__nav ol { border-left: 1px solid var(--line); }
+.cs__nav a { display: block; padding: 7px 0 7px 16px; margin-left: -1px; border-left: 2px solid transparent; font-size: 0.92rem; color: var(--muted); text-decoration: none; transition: color 140ms, border-color 140ms; }
+.cs__nav a:hover { color: var(--text); }
+.cs__nav a.on { color: var(--text); border-left-color: var(--accent); font-weight: 600; }
+.cs__body { display: grid; gap: clamp(48px, 6vw, 84px); min-width: 0; }
+.block { scroll-margin-top: 96px; min-width: 0; }
+.block__num { display: inline-block; margin-bottom: 10px; font-family: var(--mono); font-size: 0.82rem; color: var(--accent-ink); }
+.block h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem); line-height: 1.12; letter-spacing: -0.022em; margin-bottom: 16px; }
+.block > p { max-width: 38em; color: var(--muted); }
+.block > p + p { margin-top: 1em; }
+.block > p strong { color: var(--text); font-weight: 600; }
+
+.flowbox { margin-top: 26px; padding: 26px; border: 1px solid var(--line-hi); border-radius: var(--r-lg); background: var(--panel); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.flowbox h4 { font: 600 0.95rem/1.3 var(--sans); margin-bottom: 18px; }
+.flow { --gap: 34px; position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--gap); }
+.flow li { position: relative; padding: 14px 8px; border: 1px solid var(--line-hi); border-radius: var(--r-md); background: var(--bg); text-align: center; font-weight: 600; font-size: 0.9rem; line-height: 1.25; animation: lit 9s linear infinite; animation-delay: calc(var(--i) * 1.4s); }
+.flow li small { display: block; margin-top: 4px; font-weight: 400; font-size: 0.78rem; color: var(--muted); }
+.flow li:not(:last-child)::after { content: ""; position: absolute; left: 100%; top: 50%; width: var(--gap); height: 1px; background: var(--line-hi); }
+.flow li:not(:last-child)::before { content: ""; position: absolute; left: 100%; top: 50%; width: 7px; height: 7px; margin-top: -3px; border-radius: 50%; background: var(--accent); z-index: 1; opacity: 0; animation: travel 9s linear infinite; animation-delay: calc(var(--i) * 1.4s); }
+@keyframes lit { 0%, 12% { border-color: var(--accent); color: var(--accent-ink); } 17%, 100% { border-color: var(--line-hi); color: var(--text); } }
+@keyframes travel { 0%, 7% { opacity: 0; transform: translateX(0); } 8% { opacity: 1; } 15% { opacity: 1; transform: translateX(calc(var(--gap) - 7px)); } 16%, 100% { opacity: 0; } }
+@keyframes travely { 0%, 7% { opacity: 0; transform: translateY(0); } 8% { opacity: 1; } 15% { opacity: 1; transform: translateY(calc(var(--gap) - 7px)); } 16%, 100% { opacity: 0; } }
+
+.steps { counter-reset: s; display: grid; gap: 0; border-left: 1px solid var(--line-hi); margin-left: 6px; }
+.steps li { position: relative; counter-increment: s; padding: 0 0 18px 26px; font-size: 0.97rem; }
+.steps li:last-child { padding-bottom: 0; }
+.steps li::before { content: counter(s); position: absolute; left: -13px; top: -1px; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; border: 1px solid var(--line-hi); background: var(--bg); font-size: 0.78rem; font-weight: 600; color: var(--accent-ink); }
+.steps b { font-weight: 600; }
+.steps span { color: var(--muted); }
+
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+.card { padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); min-width: 0; }
+.card h4 { font: 600 0.98rem/1.3 var(--sans); margin-bottom: 8px; }
+.card p { font-size: 0.95rem; color: var(--muted); }
+.card--hi { border-color: var(--line-hi); background: var(--panel-hi); }
+
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+.fact { padding: 18px 22px; border-radius: var(--r-md); border: 1px solid var(--line-hi); background: var(--panel); }
+.fact strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1.1; letter-spacing: -0.02em; color: var(--accent-ink); }
+.fact span { display: block; margin-top: 4px; font-size: 0.88rem; color: var(--muted); line-height: 1.4; }
+
+.tablewrap { margin-top: 26px; overflow-x: auto; border: 1px solid var(--line-hi); border-radius: var(--r-md); background: var(--panel); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 520px; }
+caption { text-align: left; padding: 16px 20px 6px; font-weight: 600; font-size: 0.95rem; }
+th, td { text-align: left; padding: 13px 20px; border-top: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: 0.86rem; font-weight: 600; color: var(--muted); border-top: 0; }
+td:first-child { color: var(--text); }
+.code { display: inline-block; padding: 1px 9px; border-radius: 6px; border: 1px solid var(--line-hi); font-family: var(--mono); font-size: 0.84rem; font-weight: 500; background: var(--bg); }
+.perm { display: inline-flex; gap: 5px; }
+.perm i { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 6px; font-style: normal; font-family: var(--mono); font-size: 0.78rem; font-weight: 500; color: var(--accent-ink); background: var(--accent-bg); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+
+.board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+.board h4 { display: flex; align-items: center; gap: 10px; font: 600 0.98rem/1.3 var(--sans); margin-bottom: 14px; }
+.board li { position: relative; padding: 8px 0 8px 22px; border-top: 1px solid var(--line); font-size: 0.95rem; }
+.board li:first-child { border-top: 0; }
+.board .done li::before { content: ""; position: absolute; left: 2px; top: 1.05em; width: 9px; height: 5px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+.board .wip li::before { content: ""; position: absolute; left: 1px; top: 1em; width: 9px; height: 9px; border: 1.5px solid var(--warm); border-radius: 50%; background: linear-gradient(90deg, var(--warm) 50%, transparent 50%); }
+
+.note { margin-top: 22px; padding: 18px 22px; border-left: 3px solid var(--warm); border-radius: 0 var(--r-sm) var(--r-sm) 0; background: var(--warm-bg); font-size: 0.96rem; color: var(--text); max-width: 46em; }
+.note strong { font-weight: 600; }
+.note--plain { border-left-color: var(--accent); background: var(--accent-bg); }
+.note--plan { border-left-color: var(--plan); background: transparent; border: 1px dashed var(--line-hi); border-left: 3px dashed var(--plan); }
+
+.bullets { margin-top: 20px; display: grid; gap: 9px; max-width: 46em; }
+.bullets li { position: relative; padding-left: 22px; color: var(--muted); font-size: 0.97rem; }
+.bullets li::before { content: ""; position: absolute; left: 4px; top: 0.7em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.bullets--cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px 36px; max-width: none; }
+
+.evidence { margin-top: 24px; border: 1px solid var(--line-hi); border-radius: var(--r-md); background: var(--panel); overflow: hidden; }
+.evidence li { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 14px; padding: 13px 22px; border-top: 1px solid var(--line); font-size: 0.95rem; align-items: baseline; }
+.evidence li:first-child { border-top: 0; }
+.evidence span:first-child { font-weight: 600; }
+.evidence .path { overflow-wrap: anywhere; }
+
+.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+.slot { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 190px; padding: 20px 22px; border: 1px dashed var(--line-hi); border-radius: var(--r-md); }
+.slot b { display: block; font-weight: 600; font-size: 0.97rem; margin-bottom: 4px; }
+.slot span { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
+.slot em { font-style: normal; font-size: 0.8rem; font-weight: 600; color: var(--warm); }
+
+/* 10. AI ENGINEERING EVIDENCE ------------------------------------------------ */
+.ev { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line-hi); border-radius: var(--r-lg); overflow: hidden; background: var(--panel); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.ev > div { padding: 28px 30px 30px; border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+.ev > div:nth-child(3n+1) { border-left: 0; }
+.ev > div:nth-child(-n+3) { border-top: 0; }
+.ev h3 { font-family: var(--serif); font-weight: 400; font-size: 1.32rem; line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 10px; }
+.ev p { font-size: 0.95rem; color: var(--muted); }
+.next { margin-top: 36px; padding: clamp(24px, 3vw, 36px); border: 1px dashed var(--line-hi); border-radius: var(--r-lg); }
+.next__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.next h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.02em; }
+.next > p { color: var(--muted); max-width: 44em; }
+.road { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+.road li { padding: 16px 18px; border: 1px dashed var(--line-hi); border-radius: var(--r-md); font-weight: 600; font-size: 0.95rem; line-height: 1.35; color: var(--text); }
+.road li span { display: block; margin-top: 4px; font-weight: 400; font-size: 0.85rem; color: var(--muted); }
+
+/* 11. GITHUB, JOURNEY, CONTACT, FOOTER -------------------------------------- */
+.gh { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.repo { padding: 28px; border: 1px solid var(--line-hi); border-radius: var(--r-lg); background: var(--panel); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.repo h3 { font-family: var(--mono); font-weight: 500; font-size: 1.1rem; letter-spacing: -0.01em; margin-bottom: 10px; }
+.repo p { color: var(--muted); font-size: 0.97rem; }
+.repo .actions { margin-top: 24px; }
+.tree { border: 1px solid var(--line-hi); border-radius: var(--r-lg); background: var(--panel); overflow: hidden; }
+.tree__bar { padding: 13px 22px; border-bottom: 1px solid var(--line); font-weight: 600; font-size: 0.95rem; }
+.tree li { display: grid; grid-template-columns: 12.5rem minmax(0, 1fr); gap: 14px; padding: 12px 22px; border-top: 1px solid var(--line); font-size: 0.94rem; align-items: baseline; }
+.tree li:first-child { border-top: 0; }
+.tree li span:last-child { color: var(--muted); }
+.tree .path { color: var(--text); font-weight: 500; }
+
+.journey { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line-hi); border-radius: var(--r-lg); overflow: hidden; background: var(--panel); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.journey > li { padding: 28px 26px 30px; border-left: 1px solid var(--line); }
+.journey > li:first-child { border-left: 0; }
+.journey h3 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; letter-spacing: -0.015em; margin-bottom: 10px; }
+.journey p { font-size: 0.95rem; color: var(--muted); }
+.journey .chips { margin-top: 14px; }
+.journey .chips li { font-size: 0.8rem; padding: 2px 10px; }
+.then { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); margin-top: 20px; padding: clamp(26px, 3vw, 38px); border: 1px solid var(--line-hi); border-radius: var(--r-lg); background: var(--panel-hi); }
+.then h3 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; line-height: 1.1; letter-spacing: -0.02em; }
+.then > div > p { margin-top: 12px; color: var(--muted); font-size: 0.97rem; max-width: 30em; }
+.checks { display: grid; gap: 0; }
+.checks li { position: relative; padding: 11px 0 11px 34px; border-top: 1px solid var(--line); font-size: 0.97rem; }
+.checks li:first-child { border-top: 0; padding-top: 0; }
+.checks li::before { content: ""; position: absolute; left: 0; top: 13px; width: 18px; height: 18px; border: 1.5px dashed var(--plan); border-radius: 5px; }
+.checks li:first-child::before { top: 2px; }
+
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(24px, 5vw, 80px); align-items: end; padding: clamp(32px, 5vw, 64px); border: 1px solid var(--line-hi); border-radius: 28px; background: var(--panel); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%); }
+.contact .title { max-width: 11em; }
+.contact__side p { color: var(--muted); max-width: 30em; }
+.contact .actions { margin-top: 24px; }
+
+.footer { padding: 40px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.93rem; }
+.footer__in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 40px; align-items: end; }
+.footer q { display: block; font-family: var(--serif); font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--text); quotes: none; margin-bottom: 14px; }
+.footer__links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.footer a { color: var(--muted); text-decoration: none; font-weight: 500; }
+.footer a:hover { color: var(--accent); }
+.footer a.is-pending { opacity: 0.55; }
+.to-top { justify-self: end; }
+
+/* 12. RESPONSIVE + REDUCED MOTION ------------------------------------------- */
+@media (max-width: 1080px) {
+  .hero__in { grid-template-columns: 1fr; }
+  .trace { max-width: 520px; }
+  .cs { grid-template-columns: 1fr; }
+  .cs__nav { display: none; }
+  .skill, .skill--7, .skill--5, .skill--3, .skill--6 { grid-column: span 6; }
+  .skill--3 { grid-column: span 6; }
+  .skill--8 { grid-column: span 6; }
+  .skill--12 { grid-column: 1 / -1; }
+  .projects { grid-template-columns: 1fr; }
+  .ev { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ev > div { border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+  .ev > div:nth-child(odd) { border-left: 0; }
+  .ev > div:nth-child(-n+2) { border-top: 0; }
+  .journey { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .journey > li:nth-child(odd) { border-left: 0; }
+  .journey > li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .gh, .then, .contact, .about, .head--split, .gp { grid-template-columns: 1fr; }
+  .trio { grid-template-columns: 1fr; }
+  .head--split { align-items: start; gap: 18px; }
+  .index { grid-template-columns: repeat(2, 1fr); }
+  .index a:nth-child(3) { border-left: 0; }
+  .index a:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .road { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  html { scroll-padding-top: 76px; }
+  .nav__toggle { display: inline-grid; }
+  .nav__links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 22px; background: color-mix(in srgb, var(--bg) 92%, transparent); border-bottom: 1px solid var(--line); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+  .nav__links.open { display: flex; }
+  .nav__links a:not(.btn) { padding: 15px 0; font-size: 1.02rem; border-bottom: 1px solid var(--line); }
+  .nav__links .btn { margin-top: 16px; min-height: 48px; }
+  .hero__name span { display: block; }
+  h1.display .line:nth-child(2) { padding-left: 0.3em; }
+  h1.display .line:nth-child(3) { padding-left: 0.6em; }
+  .actions .btn { flex: 1 1 auto; }
+  .skills { gap: 12px; }
+  .skill, .skill--7, .skill--5, .skill--3, .skill--6 { grid-column: 1 / -1; }
+  .skill--7 ul, .skill--6 ul, .skill--8 ul { grid-template-columns: 1fr; }
+  .skill__cols { grid-template-columns: 1fr; }
+  .project dl > div { grid-template-columns: 1fr; gap: 4px; }
+  .two, .facts, .board, .slots, .ev, .journey, .bullets--cols, .road, .index, .todo-grid { grid-template-columns: 1fr; }
+  .ev > div, .journey > li { border-left: 0 !important; border-top: 1px solid var(--line) !important; }
+  .ev > div:first-child, .journey > li:first-child { border-top: 0 !important; }
+  .index a { border-left: 0 !important; border-top: 1px solid var(--line); }
+  .index a:first-child { border-top: 0; }
+  .evidence li, .tree li { grid-template-columns: 1fr; gap: 2px; }
+  .flow { grid-template-columns: 1fr; --gap: 30px; }
+  .flow li:not(:last-child)::after { left: 50%; top: 100%; width: 1px; height: var(--gap); }
+  .flow li:not(:last-child)::before { left: 50%; top: 100%; margin: 0 0 0 -3px; animation-name: travely; }
+  .footer__in { grid-template-columns: 1fr; }
+  .to-top { justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  h1.display .line { opacity: 1; transform: none; }
+  .marquee__track { animation: none; width: auto; flex-wrap: wrap; }
+  .marquee ul[aria-hidden] { display: none; }
+  .marquee ul { flex-wrap: wrap; }
+  body::after { animation: none; }
+  .trace__list::after { display: none; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="nav" id="nav">
+  <div class="container nav__in">
+    <a class="nav__brand" href="#top">Ibrahim Yebo Goshie</a>
+    <nav id="menu" class="nav__links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Learning Journey</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn--solid" href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <div class="nav__tools">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch color theme">
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2z"/></svg>
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      </button>
+      <button class="icon-btn nav__toggle" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="container hero__in">
+    <div class="hero__copy">
+      <a class="status" href="#cs-rbac"><span class="status__dot" aria-hidden="true"></span>Currently building: role-based access control for DocuChat</a>
+      <p class="hero__name">Ibrahim Yebo Goshie <span>Aspiring AI engineer with a backend foundation</span></p>
+      <h1 class="display" id="hero-title">
+        <span class="line">Build it.</span>
+        <span class="line">Document it.</span>
+        <span class="line">Show your work.</span>
+      </h1>
+      <p class="lead">I'm building the <strong>secure, tested backend</strong> that AI applications depend on. My main project is DocuChat, a Python and FastAPI backend with PostgreSQL, JWT authentication and automated tests, built in the Mastering Backend AI Engineering Bootcamp.</p>
+      <div class="actions">
+        <a class="btn btn--solid" href="#projects">View projects</a>
+        <a class="btn" href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="#" data-link="cv" target="_blank" rel="noopener">View CV</a>
+      </div>
+    </div>
+
+    <aside class="trace" aria-labelledby="trace-title">
+      <div class="trace__head"><h2 id="trace-title">DocuChat request path</h2><span>How one request moves through the code</span></div>
+      <ol class="trace__list">
+        <li style="--i:0"><div><b>Client or Swagger UI</b><small>sends the request</small></div></li>
+        <li style="--i:1"><div><b>FastAPI routes</b><small>receive requests and return responses</small></div></li>
+        <li style="--i:2"><div><b>Services</b><small>handle application logic</small></div></li>
+        <li style="--i:3"><div><b>Repositories</b><small>perform database operations</small></div></li>
+        <li style="--i:4"><div><b>SQLAlchemy models</b><small>define the persisted structures</small></div></li>
+        <li style="--i:5"><div><b>PostgreSQL</b><small>stores the relational data</small></div></li>
+      </ol>
+      <div class="trace__foot">
+        <span class="tag tag--done">JWT authentication</span>
+        <span class="tag tag--done">Alembic migrations</span>
+        <span class="tag tag--wip">RBAC in progress</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="container"><p>Tools I have used in DocuChat</p></div>
+  <div class="marquee" aria-label="Tools used in DocuChat">
+    <div class="marquee__track">
+      <ul><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>PyJWT</li><li>pytest</li><li>HTTPX</li><li>Uvicorn</li><li>Swagger UI / OpenAPI</li><li>Git</li><li>GitHub</li></ul>
+      <ul aria-hidden="true"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>PyJWT</li><li>pytest</li><li>HTTPX</li><li>Uvicorn</li><li>Swagger UI / OpenAPI</li><li>Git</li><li>GitHub</li></ul>
+    </div>
+  </div>
+</div>
+
+<nav class="index" aria-label="Find the evidence">
+  <a href="#github"><b>Source code</b><span>The repository layout and which files to open first.</span><em>Open the code guide</em></a>
+  <a href="#cs-solution"><b>Architecture</b><span>Request flow, authentication flow and the layers between them.</span><em>See the diagrams</em></a>
+  <a href="#cs-errors"><b>API behaviour and tests</b><span>Verified error responses and what the tests caught.</span><em>Read the evidence</em></a>
+  <a href="#cs-rbac"><b>Authorization status</b><span>What is finished and what is still in progress.</span><em>See the status</em></a>
+</nav>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="head"><h2 class="title" id="about-title">Building the foundations behind intelligent applications.</h2></div>
+    <div class="about">
+      <div class="prose">
+        <p>I'm Ibrahim Yebo Goshie, an aspiring AI engineer with a growing foundation in backend software engineering.</p>
+        <p>I'm driven by how applications work beneath the interface: how APIs handle requests, how databases store and retrieve information, how authentication protects resources, and how the parts work together to deliver reliable software.</p>
+        <p>Through the Mastering Backend AI Engineering Bootcamp I have been developing DocuChat, a document-focused backend application built with Python and FastAPI. It has given me practical experience with relational databases, SQLAlchemy, database migrations, authentication, token management, service-layer logic, repository patterns and automated testing.</p>
+        <p>I'm learning to think about architecture, security and maintainability, and about how to verify that a system behaves as expected. My current focus is a strong backend foundation that I can extend into AI-powered systems, including applications that use language models and knowledge-based retrieval.</p>
+      </div>
+      <div class="aside">
+        <div class="callout"><h3>What I'm working toward</h3><p>Becoming an AI engineer who can build, understand, test and document the systems that make intelligent applications useful.</p></div>
+        <div class="callout callout--quiet"><h3>Beyond the code</h3><p>My background in graphic design and visual communication shapes how I present technical work. I value clarity and organisation, which help when documenting APIs, explaining architecture, writing READMEs and presenting case studies. I want to build systems that work well and that other people can understand, maintain and improve.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="title" id="skills-title">Technical skills, split by what I have done and what I'm still learning.</h2>
+      <p>Every item marked as used appears in my DocuChat work. Anything I'm still developing is marked that way, and nothing in the learning column is presented as expertise.</p>
+    </div>
+    <div class="legend" aria-label="Key">
+      <span class="tag tag--done">Used so far</span>
+      <span class="tag tag--wip">In development</span>
+      <span class="tag tag--plan">Learning next</span>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <h3>Programming</h3>
+        <ul><li>Python</li><li>SQL fundamentals</li></ul>
+      </div>
+      <div class="skill skill--8">
+        <h3>Backend development</h3>
+        <ul>
+          <li>FastAPI</li><li>REST API development</li><li>Service-layer architecture</li>
+          <li>Repository pattern</li><li>Dependency injection</li><li>Request validation and error handling</li>
+        </ul>
+      </div>
+      <div class="skill skill--6">
+        <h3>Databases</h3>
+        <ul>
+          <li>PostgreSQL</li><li>SQLAlchemy ORM</li><li>Alembic database migrations</li>
+          <li>Relational data modeling</li><li>Foreign keys, unique constraints and relationships</li><li>Database sessions and transactions</li>
+        </ul>
+      </div>
+      <div class="skill skill--6">
+        <h3>Authentication and security</h3>
+        <ul>
+          <li>JSON Web Tokens (JWT)</li><li>Access and refresh tokens</li><li>Password hashing</li>
+          <li>Refresh-token hashing and rotation</li><li>Authentication dependencies</li>
+          <li class="wip">Role-based access control (RBAC)<small>In development</small></li>
+        </ul>
+      </div>
+      <div class="skill skill--5">
+        <h3>Testing and quality</h3>
+        <ul><li>pytest</li><li>FastAPI TestClient</li><li>HTTPX</li><li>Unit testing</li><li>API integration testing</li><li>Error-case verification</li></ul>
+      </div>
+      <div class="skill skill--7">
+        <h3>Development tools</h3>
+        <ul>
+          <li>Git</li><li>GitHub</li><li>Windows PowerShell</li><li>Python virtual environments</li>
+          <li>Environment variables and .env configuration</li><li>Uvicorn</li><li>Swagger UI / OpenAPI documentation</li>
+        </ul>
+      </div>
+      <div class="skill skill--12">
+        <h3>AI engineering</h3>
+        <div class="skill__cols">
+          <div>
+            <ul><li>Backend architecture for AI-powered applications</li><li>Secure API and data foundations</li></ul>
+          </div>
+          <div>
+            <ul>
+              <li class="plan">LLM API integration</li><li class="plan">Prompt engineering</li><li class="plan">Retrieval-augmented generation (RAG)</li>
+              <li class="plan">Embeddings and vector search</li><li class="plan">AI evaluation</li>
+            </ul>
+          </div>
+        </div>
+        <p class="fine">The dashed items are my current learning direction. They are not features I have implemented in DocuChat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="title" id="projects-title">Two projects, with the code to check them.</h2>
+      <p>The guided bootcamp project and the group project I was assigned. Each one says what was built, how it works and where to inspect it.</p>
+    </div>
+    <div class="projects">
+
+      <article class="project" aria-labelledby="docuchat-title">
+        <div class="project__top"><span class="project__kind">Project 1: guided bootcamp project</span><span class="tag tag--wip">RBAC in progress</span></div>
+        <h3 id="docuchat-title">DocuChat, a backend API</h3>
+        <p class="project__lede">A document-focused Python backend built in the Mastering Backend AI Engineering Bootcamp. It's how I'm learning to design and build the infrastructure behind a modern application, using FastAPI for the API layer, PostgreSQL for storage and SQLAlchemy for database access.</p>
+        <dl>
+          <div><dt>The problem</dt><dd>Apps with user accounts and private resources need more than endpoints that return data. They need a backend that authenticates users, validates requests, stores information reliably and controls access to protected operations.</dd></div>
+          <div><dt>The solution</dt><dd>Routes, services, repositories and models are kept separate, so HTTP handling, business logic and database operations don't tangle. Authentication runs through reusable dependencies.</dd></div>
+          <div><dt>Security</dt><dd>Passwords and refresh tokens are hashed. Access tokens expire after 15 minutes and refresh tokens after seven days, signed with separate secrets.</dd></div>
+          <div><dt>Stack</dt><dd><ul class="chips"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>PyJWT</li><li>pytest</li><li>HTTPX</li><li>Git</li><li>GitHub</li></ul></dd></div>
+          <div><dt>Status</dt><dd>Core structure, authentication, migrations and initial test infrastructure are in place. The RBAC schema and role seeding are done. Default-role assignment and permission enforcement are still in progress.</dd></div>
+        </dl>
+        <div class="project__links">
+          <a class="btn btn--solid" href="#case-study">Read the case study</a>
+          <a class="textlink" href="#" data-link="repo" target="_blank" rel="noopener">Source code</a>
+          <a class="textlink" href="#" data-link="apiDocs" target="_blank" rel="noopener">API documentation</a>
+          <a class="textlink" href="#" data-link="liveApi" target="_blank" rel="noopener">Live API</a>
+          <a class="textlink" href="#" data-link="projectDocs" target="_blank" rel="noopener">Project documentation</a>
+        </div>
+      </article>
+
+      <article class="project" aria-labelledby="group-title">
+        <div class="project__top"><span class="project__kind">Project 2: collaborative group project</span><span class="tag tag--plan">Proposed solution</span></div>
+        <h3 id="group-title">AI-Powered Public Transportation Prediction System</h3>
+        <p class="project__lede">A group project about a familiar problem: people in Nigeria lose a lot of time waiting for buses and other public transport, with no clear idea how long the wait or the journey will be. This card sets out the solution our group proposed.</p>
+
+        <div class="gp">
+          <div>
+            <h4>The problem</h4>
+            <p>Many people in Nigeria spend a long time waiting for buses and other public transport. They also face heavy traffic, overcrowded vehicles and uncertainty about how long a journey will take. Transport operators find it hard to know where more of their services are needed at different times of the day. The result is wasted time, overcrowding and poor service.</p>
+            <h4 style="margin-top:24px">Who it's for</h4>
+            <p>Passengers who use buses, BRT, danfo, keke and other shared transport. Transport operators can also use it to see where and when more passengers are likely to need transport.</p>
+            <h4 style="margin-top:24px">The proposed solution</h4>
+            <p>An AI-powered system that tells people how long they may wait for transport and how long their journey may take. It also tells operators when and where many passengers are likely to need their services, so they can be available where they're needed.</p>
+          </div>
+          <div>
+            <h4>How it works</h4>
+            <ol class="steps">
+              <li><b>A passenger enters where they are going</b></li>
+              <li><b>The system checks available routes</b> <span>and current information</span></li>
+              <li><b>AI studies the information</b></li>
+              <li><b>The system estimates the waiting and travel time</b></li>
+              <li><b>The passenger receives the estimate</b> <span>and chooses the most suitable option</span></li>
+            </ol>
+            <p style="margin-top:14px">Operators can also see where passenger demand is expected to be high and plan for it.</p>
+            <h4 style="margin-top:24px">Where AI is needed</h4>
+            <p>Normal software shows routes and information. AI predicts what is likely to happen, using past traffic conditions, passenger numbers, time of day and current road conditions, to estimate:</p>
+            <ul class="bullets" style="margin-top:12px">
+              <li>How long a passenger may wait for transport</li>
+              <li>How long a journey may take</li>
+              <li>Which routes may be very busy</li>
+              <li>Where more passengers are likely to need buses or keke</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="trio">
+          <div class="card"><h4>Expected outcome</h4>
+            <ul class="bullets">
+              <li>Less time spent waiting for transport</li>
+              <li>Better journey planning for passengers</li>
+              <li>Less overcrowding on busy routes</li>
+              <li>Operators know where more buses are needed</li>
+              <li>A better overall transport experience</li>
+            </ul></div>
+          <div class="card"><h4>Risks and limitations</h4>
+            <ul class="bullets">
+              <li><b>Wrong predictions:</b> accidents, road closures or sudden traffic can affect accuracy</li>
+              <li><b>Lack of information:</b> good predictions need enough reliable data</li>
+              <li><b>Internet access:</b> people without smartphones or reliable internet may struggle to use it</li>
+              <li><b>Privacy:</b> any personal information collected must be protected</li>
+            </ul></div>
+          <div class="card"><h4>How success would be measured</h4>
+            <ul class="bullets">
+              <li>Whether passengers spend less time waiting</li>
+              <li>How accurate the predicted waiting and travel times are</li>
+              <li>Whether overcrowding falls on busy routes</li>
+              <li>How satisfied passengers are with the information</li>
+            </ul></div>
+        </div>
+
+        <div class="todo-grid">
+          <p class="todo">My contribution: the features, decisions, testing, debugging and documentation that were yours.</p>
+          <p class="todo">Technology: only what the group actually used.</p>
+          <p class="todo">Challenges and lessons: one real technical or teamwork challenge and what you learned.</p>
+          <p class="todo">Project status: what has been built so far.</p>
+        </div>
+        <div class="project__links">
+          <a class="textlink" href="#" data-link="gRepo" target="_blank" rel="noopener">Group repository</a>
+          <a class="textlink" href="#" data-link="gLive" target="_blank" rel="noopener">Live application</a>
+          <a class="textlink" href="#" data-link="gDocs" target="_blank" rel="noopener">Documentation</a>
+          <a class="textlink" href="#" data-link="gContrib" target="_blank" rel="noopener">My commits and pull requests</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CASE STUDY ===================== -->
+<section class="section" id="case-study" aria-labelledby="cs-title">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="title" id="cs-title">Inside DocuChat</h2>
+      <p>From API requests to secure backend operations: how it's structured, how authentication works, what I verified and what I'm still finishing.</p>
+    </div>
+
+    <div class="cs">
+      <nav class="cs__nav" aria-label="Case study sections">
+        <p>On this page</p>
+        <ol>
+          <li><a href="#cs-problem">Problem</a></li>
+          <li><a href="#cs-solution">Solution and architecture</a></li>
+          <li><a href="#cs-auth">Authentication</a></li>
+          <li><a href="#cs-db">Database design</a></li>
+          <li><a href="#cs-errors">Error handling</a></li>
+          <li><a href="#cs-testing">Testing</a></li>
+          <li><a href="#cs-rbac">Authorization and RBAC</a></li>
+          <li><a href="#cs-ai">AI engineering relevance</a></li>
+          <li><a href="#cs-built">What I built</a></li>
+          <li><a href="#cs-lessons">Challenges and lessons</a></li>
+          <li><a href="#cs-evidence">Evidence</a></li>
+        </ol>
+      </nav>
+
+      <div class="cs__body">
+
+        <div class="block" id="cs-problem">
+          <span class="block__num">01</span>
+          <h3>Problem</h3>
+          <p>A document-focused application needs a backend that can manage user accounts, communicate through predictable API endpoints, store data in a relational database and restrict access to protected functionality.</p>
+          <p>Without a clear architecture, authentication and database logic end up tied to individual routes, which makes the system hard to test and extend.</p>
+        </div>
+
+        <div class="block" id="cs-solution">
+          <span class="block__num">02</span>
+          <h3>Solution and architecture</h3>
+          <p>I structured DocuChat around separate routes, services, repositories and database models. <strong>Routes</strong> receive requests and return responses. <strong>Services</strong> handle application logic. <strong>Repositories</strong> perform database operations. <strong>SQLAlchemy models</strong> define the persisted structures, and <strong>PostgreSQL</strong> stores the relational data.</p>
+          <div class="flowbox">
+            <h4>Request flow</h4>
+            <ol class="flow" aria-label="Request flow: Client or Swagger UI, FastAPI routes, services, repositories, SQLAlchemy models, PostgreSQL">
+              <li style="--i:0">Client / Swagger UI<small>request</small></li>
+              <li style="--i:1">FastAPI routes<small>HTTP in and out</small></li>
+              <li style="--i:2">Services<small>logic</small></li>
+              <li style="--i:3">Repositories<small>data access</small></li>
+              <li style="--i:4">SQLAlchemy models<small>structures</small></li>
+              <li style="--i:5">PostgreSQL<small>storage</small></li>
+            </ol>
+          </div>
+          <div class="note note--plain"><strong>Technology:</strong> Python, FastAPI, PostgreSQL, SQLAlchemy, Alembic, PyJWT, password hashing, pytest, HTTPX, Git and GitHub.</div>
+        </div>
+
+        <div class="block" id="cs-auth">
+          <span class="block__num">03</span>
+          <h3>Authentication</h3>
+          <p>I implemented a JWT-based flow with separate access and refresh tokens. Access tokens are short-lived. Refresh tokens last longer and are used to get new access credentials. Password hashes and refresh-token hashes are stored instead of the original secrets, and the authentication dependency validates the token and loads the user before a protected endpoint runs.</p>
+          <div class="facts">
+            <div class="fact"><strong>15 min</strong><span>access-token expiry</span></div>
+            <div class="fact"><strong>7 days</strong><span>refresh-token expiry</span></div>
+            <div class="fact"><strong>2 secrets</strong><span>separate signing secrets for access and refresh tokens</span></div>
+          </div>
+          <div class="flowbox">
+            <h4>Authentication flow for a protected request</h4>
+            <ol class="steps">
+              <li><b>Incoming request</b> <span>arrives at a protected endpoint</span></li>
+              <li><b>Extract the bearer token</b> <span>from the request</span></li>
+              <li><b>Verify the JWT</b></li>
+              <li><b>Validate token type and expiry</b></li>
+              <li><b>Identify the user</b></li>
+              <li><b>Retrieve the user from the database</b></li>
+              <li><b>Authorize access</b> <span>to the requested resource</span></li>
+            </ol>
+          </div>
+          <div class="note note--plain"><strong>Authentication and authorization are different.</strong> Authentication establishes who is making a request. Authorization decides what that user may do. In DocuChat, JWT validation and database-backed user checks form the authentication layer, and the RBAC work adds a more granular permissions model than broad role checks.</div>
+        </div>
+
+        <div class="block" id="cs-db">
+          <span class="block__num">04</span>
+          <h3>Database design</h3>
+          <p>PostgreSQL provides persistent storage. The project includes user and refresh-token models as well as document-related database components, and relationships and constraints keep related records consistent.</p>
+          <div class="two">
+            <div class="card"><h4>SQLAlchemy</h4><p>Maps database tables to Python models.</p></div>
+            <div class="card"><h4>Alembic</h4><p>Manages schema changes as version-controlled migrations instead of informal edits.</p></div>
+          </div>
+        </div>
+
+        <div class="block" id="cs-errors">
+          <span class="block__num">05</span>
+          <h3>Error handling</h3>
+          <p>I added centralized application error handling and explicit responses for common failures. These are behaviours I saw during development.</p>
+          <div class="tablewrap">
+            <table>
+              <caption>Verified during development</caption>
+              <thead><tr><th scope="col">Scenario</th><th scope="col">Response</th></tr></thead>
+              <tbody>
+                <tr><td>Registering with details that already exist</td><td><span class="code">409</span> Conflict</td></tr>
+                <tr><td>Logging in with invalid credentials</td><td><span class="code">401</span> Unauthorized</td></tr>
+                <tr><td>A non-admin using a restricted admin operation</td><td><span class="code">403</span> Forbidden</td></tr>
+                <tr><td>A protected request without valid authentication</td><td>Rejected</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="block" id="cs-testing">
+          <span class="block__num">06</span>
+          <h3>Testing</h3>
+          <p>I started a pytest suite with unit tests and API integration tests, using HTTPX and FastAPI's TestClient.</p>
+          <div class="note"><strong>What the tests caught.</strong> While I was expanding RBAC, the integration tests exposed a missing roles table in the test database. Passing unit tests did not mean the whole application worked with its database.</div>
+          <div class="flowbox">
+            <h4>Next steps for the test suite</h4>
+            <ol class="steps">
+              <li><b>Align the test database schema</b> <span>with the current migrations</span></li>
+              <li><b>Rerun the integration suite</b></li>
+              <li><b>Verify authorization behaviour</b></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="block" id="cs-rbac">
+          <span class="block__num">07</span>
+          <h3>Authorization and RBAC</h3>
+          <p>The next stage is a granular permission model. The schema and initial seed data are in place. The rest is still being built.</p>
+          <div class="tablewrap">
+            <table>
+              <caption>Planned permissions by role</caption>
+              <thead><tr><th scope="col">Role</th><th scope="col">Documents</th><th scope="col">Conversations</th></tr></thead>
+              <tbody>
+                <tr><td>Admin</td><td colspan="2">Full administrative permissions</td></tr>
+                <tr><td>Member</td><td><span class="perm"><i>create</i><i>read</i><i>update</i></span></td><td><span class="perm"><i>create</i><i>read</i></span></td></tr>
+                <tr><td>Viewer</td><td><span class="perm"><i>read</i></span></td><td><span class="perm"><i>read</i></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="board">
+            <div class="card done"><h4><span class="tag tag--done">Done</span></h4>
+              <ul><li>RBAC schema</li><li>Initial role and permission seeding</li></ul></div>
+            <div class="card wip"><h4><span class="tag tag--wip">In progress</span></h4>
+              <ul><li>Automatic default-role assignment</li><li>Route-level permission enforcement</li><li>Ownership checks</li><li>Administrative role management</li><li>Complete verification</li></ul></div>
+          </div>
+        </div>
+
+        <div class="block" id="cs-ai">
+          <span class="block__num">08</span>
+          <h3>AI engineering relevance</h3>
+          <p>DocuChat is currently a backend engineering foundation for document-oriented applications. Its architecture and data-access components are relevant experience for building the infrastructure around AI features.</p>
+          <div class="note note--plan"><strong>A proposed direction, not a feature.</strong> A future AI-enabled version could connect document processing and retrieval to a language model so users can ask questions about their documents. None of that is implemented yet.</div>
+        </div>
+
+        <div class="block" id="cs-built">
+          <h3>What I built</h3>
+          <ul class="bullets bullets--cols">
+            <li>API endpoints with FastAPI</li>
+            <li>Application logic split into routes, services and repositories</li>
+            <li>A PostgreSQL connection through SQLAlchemy</li>
+            <li>Schema changes managed with Alembic migrations</li>
+            <li>User registration and login</li>
+            <li>Password hashing instead of plaintext storage</li>
+            <li>JWT access tokens (15-minute expiry) and refresh tokens (seven-day expiry)</li>
+            <li>Separate signing secrets for access and refresh tokens</li>
+            <li>Refresh-token hashing, storage, rotation and revocation logic</li>
+            <li>Authentication dependencies for protected endpoints</li>
+            <li>Custom application errors with centralized handling</li>
+            <li>Authorization checks for restricted roles</li>
+            <li>Data-access components for users, refresh tokens and documents</li>
+            <li>Unit and integration tests with pytest and HTTPX / TestClient</li>
+            <li>The start of database-backed roles and permissions</li>
+          </ul>
+        </div>
+
+        <div class="block" id="cs-lessons">
+          <h3>Challenges and lessons</h3>
+          <div class="two">
+            <div class="card card--hi"><h4>Translating concepts into Python</h4><p>The bootcamp's original material meant translating backend concepts into Python while keeping the intended architecture. It pushed me to understand what each layer is for instead of copying patterns.</p></div>
+            <div class="card card--hi"><h4>Managing authentication securely</h4><p>Access tokens, refresh tokens, token-type checks, password hashing and rotation all needed careful handling of token validity and session security.</p></div>
+            <div class="card card--hi"><h4>Keeping schema and models aligned</h4><p>SQLAlchemy and Alembic taught me to treat schema changes as explicit, version-controlled changes.</p></div>
+            <div class="card card--hi"><h4>Testing database-backed behaviour</h4><p>Testing raised problems with test isolation, database state and making sure the test database has the schema the current models and migrations need.</p></div>
+          </div>
+          <h3 class="sub" style="margin-top:34px">What I learned</h3>
+          <ul class="bullets bullets--cols" style="margin-top:12px">
+            <li>How a FastAPI request moves through the backend layers</li>
+            <li>How to keep business logic separate from database operations</li>
+            <li>How JWT access and refresh tokens serve different purposes</li>
+            <li>Why password hashing and token revocation matter</li>
+            <li>How relational models and migrations work together</li>
+            <li>Why custom error handling makes an API more consistent</li>
+            <li>How to approach automated testing and investigate integration failures</li>
+            <li>Why authorization should be designed explicitly, not added afterwards</li>
+            <li>Why working software needs clear documentation and reproducible tests</li>
+          </ul>
+        </div>
+
+        <div class="block" id="cs-evidence">
+          <h3>Evidence</h3>
+          <p>Where to check each claim in the repository.</p>
+          <ul class="evidence">
+            <li><span>Repository</span><a class="textlink" href="#" data-link="repo" target="_blank" rel="noopener">DocuChat source code</a></li>
+            <li><span>README</span><a class="textlink" href="#" data-link="readme" target="_blank" rel="noopener">README and setup instructions</a></li>
+            <li><span>API documentation</span><a class="textlink" href="#" data-link="apiDocs" target="_blank" rel="noopener">Swagger documentation</a></li>
+            <li><span>Migrations</span><span class="path">migrations/versions/</span></li>
+            <li><span>Authentication</span><span class="path">services/auth_service.py, middleware/auth.py</span></li>
+            <li><span>Repositories</span><span class="path">repositories/</span></li>
+            <li><span>Database models</span><span class="path">database/models.py</span></li>
+            <li><span>Automated tests</span><span class="path">tests/ <small>(path and test report to be confirmed)</small></span></li>
+            <li><span>Deployment</span><a class="textlink" href="#" data-link="liveApi" target="_blank" rel="noopener">Live API, if deployed</a></li>
+          </ul>
+          <div class="slots">
+            <div class="slot"><div><b>API screenshot</b><span>Swagger UI showing the protected endpoints and a real response.</span></div><em>To add</em></div>
+            <div class="slot"><div><b>Database relationship diagram</b><span>Exported from your models, showing the real tables and relationships.</span></div><em>To add</em></div>
+            <div class="slot"><div><b>Test report</b><span>A screenshot or report from a passing run, once the suite is aligned.</span></div><em>To add</em></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AI ENGINEERING EVIDENCE ===================== -->
+<section class="section" id="ai-work" aria-labelledby="ai-title">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="title" id="ai-title">Building the foundations before adding intelligence.</h2>
+      <p>AI engineering is more than calling a model API. It also means building the software that makes AI features accessible, secure and useful. DocuChat shows that foundation in six areas.</p>
+    </div>
+    <div class="ev">
+      <div><h3>Backend architecture</h3><p>A layered structure separates request handling, business logic and database operations.</p></div>
+      <div><h3>Secure application access</h3><p>Authentication with JWTs, password hashing, refresh-token handling and protected API dependencies.</p></div>
+      <div><h3>Data persistence</h3><p>PostgreSQL, SQLAlchemy and Alembic to model and manage application data.</p></div>
+      <div><h3>API behaviour</h3><p>Validation, authentication failures, authorization errors and centralized exception handling.</p></div>
+      <div><h3>Testing and debugging</h3><p>pytest and HTTPX / FastAPI TestClient to investigate behaviour and find integration problems.</p></div>
+      <div><h3>Knowledge-based foundations</h3><p>DocuChat's document focus is a base for exploring document retrieval and question answering.</p></div>
+    </div>
+    <div class="next">
+      <div class="next__head"><h3>What comes next</h3><span class="tag tag--plan">Planned, not yet implemented</span></div>
+      <p>These will be added to this portfolio only once I've implemented and tested them.</p>
+      <ol class="road">
+        <li>LLM API integration<span>Connect the backend to a language model</span></li>
+        <li>Embeddings and vector search<span>Find the document passages that matter</span></li>
+        <li>Retrieval-augmented generation<span>Answer questions from the documents</span></li>
+        <li>Evaluation<span>Measure answer quality and reliability honestly</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GITHUB ===================== -->
+<section class="section" id="github" aria-labelledby="gh-title">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="title" id="gh-title">Don't just take my word for it. Explore the implementation.</h2>
+      <p>GitHub is where I document the code behind my projects, organise the work and make my technical decisions easy to inspect.</p>
+    </div>
+    <div class="gh">
+      <div class="repo">
+        <h3>DocuChat backend repository</h3>
+        <p>A Python and FastAPI backend project developed during the Mastering Backend AI Engineering Bootcamp, featuring authentication, relational database integration, structured application layers and ongoing role-based authorization work.</p>
+        <div class="actions">
+          <a class="btn btn--solid" href="#" data-link="repo" target="_blank" rel="noopener">Source code</a>
+          <a class="btn" href="#" data-link="github" target="_blank" rel="noopener">GitHub profile</a>
+          <a class="btn" href="#" data-link="readme" target="_blank" rel="noopener">README and setup</a>
+        </div>
+      </div>
+      <div class="tree">
+        <div class="tree__bar">What to explore</div>
+        <ul>
+          <li><span class="path">server.py</span><span>Application entry point</span></li>
+          <li><span class="path">routes/</span><span>API endpoint organisation</span></li>
+          <li><span class="path">services/</span><span>Business logic</span></li>
+          <li><span class="path">repositories/</span><span>Database access</span></li>
+          <li><span class="path">database/</span><span>SQLAlchemy configuration and models</span></li>
+          <li><span class="path">middleware/auth.py</span><span>The authentication dependency</span></li>
+          <li><span class="path">migrations/</span><span>Alembic schema history</span></li>
+          <li><span class="path">tests/</span><span>Automated test suite, once its layout is confirmed</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEARNING JOURNEY ===================== -->
+<section class="section" id="journey" aria-labelledby="journey-title">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="title" id="journey-title">From learning concepts to building backend systems.</h2>
+      <p>Where I started, what I picked up, what I made and what slowed me down along the way.</p>
+    </div>
+    <ol class="journey">
+      <li>
+        <h3>Before</h3>
+        <p>I wanted to understand how backend applications work and how the technologies fit together. I wanted to go beyond knowing tool names and be able to implement and explain them in a working application.</p>
+      </li>
+      <li>
+        <h3>What I learned</h3>
+        <p>The skills I picked up along the way:</p>
+        <ul class="chips"><li>Python backends</li><li>FastAPI routes</li><li>SQLAlchemy</li><li>PostgreSQL</li><li>Alembic</li><li>Token management</li><li>Password hashing</li><li>Service and repository layers</li><li>HTTP status codes</li><li>Unit and integration tests</li><li>Git</li><li>Authorization basics</li></ul>
+      </li>
+      <li>
+        <h3>What I built</h3>
+        <p>A document-focused backend with authentication, persistent data models, migrations, protected routes and a structured architecture. I've also started adding role-based access control, with roles, permissions and their database relationships.</p>
+      </li>
+      <li>
+        <h3>What slowed me down</h3>
+        <p>Translating engineering concepts into Python meant understanding each component. Authentication raised questions about expiry, revocation and protected access. Migrations had to stay in step with the models. Integration tests showed how easily a test database falls behind the schema.</p>
+      </li>
+    </ol>
+    <div class="then">
+      <div>
+        <h3>What's next</h3>
+        <p>These are goals, not finished work. I'll move them into the sections above as I complete and verify them.</p>
+      </div>
+      <ul class="checks">
+        <li>Complete RBAC and its tests</li>
+        <li>Improve project documentation and reproducible setup instructions</li>
+        <li>Complete and document the assigned group project</li>
+        <li>Strengthen deployment and production-readiness skills</li>
+        <li>Build practical LLM API integrations</li>
+        <li>Explore embeddings, vector search and RAG</li>
+        <li>Develop a complete AI-powered application with honestly reported evaluation results</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="contact">
+      <h2 class="title" id="contact-title">If this is the work you need, let's talk.</h2>
+      <div class="contact__side">
+        <p>Questions about the projects, the code or the bootcamp work are welcome. Email is quickest, and the code and CV are linked here too.</p>
+        <div class="actions">
+          <a class="btn btn--solid" href="#" data-link="email">Email me</a>
+          <a class="btn" href="#" data-link="linkedin" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="#" data-link="cv" target="_blank" rel="noopener">View CV</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__in">
+    <div>
+      <q>Built with curiosity, documented with intention, and improved through practice.</q>
+      <p>&copy; 2026 Ibrahim Yebo Goshie. All rights reserved.</p>
+    </div>
+    <div>
+      <p class="footer__links">
+        <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+        <a href="#" data-link="linkedin" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" data-link="email">Email</a>
+        <a href="#" data-link="siteRepo" target="_blank" rel="noopener">Source of this site</a>
+      </p>
+      <p class="to-top" style="margin-top:14px"><a href="#top">Back to top</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =======================================================================
+     1. YOUR LINKS — the only place you need to edit URLs.
+        Leave a value empty ('') and that link shows as a dashed, inactive
+        button until you fill it in. Open the browser console to see which
+        links are still missing.
+     ======================================================================= */
+  var LINKS = {
+    github:      'https://github.com/metrogee',   // your GitHub profile, e.g. https://github.com/yourname
+    linkedin:    'https://www.linkedin.com/in/ibrahimgoshie',   // your LinkedIn profile
+    cv:          'https://drive.google.com/file/d/1N9Ye51-acP7mc1TsaCbmxBksvjiUTsQg/view?usp=drive_link',   // link or file path to your CV, e.g. cv.pdf
+    email:       'yebogoshie@gmail.com', // your professional email address
+    repo:        'https://github.com/metrogee/docuchat_fastapi_backend',   // DocuChat repository
+    readme:      'https://github.com/metrogee/docuchat_fastapi_backend/blob/e04be0a3a2ef2e2775b55901076394e7e002088f/README.md',   // DocuChat README (setup instructions)
+    apiDocs:     '',   // Swagger / OpenAPI docs, if public
+    liveApi:     '',   // deployed API, if deployed
+    projectDocs: '',   // other DocuChat documentation
+    gRepo:       '',   // group project repository
+    gLive:       '',   // group project live application
+    gDocs:       '',   // group project documentation
+    gContrib:    '',   // your commits / pull requests in the group project
+    siteRepo:    ''    // the GitHub repository for this portfolio site
+  };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var all = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* =======================================================================
+     2. LINK WIRING
+     ======================================================================= */
+  var missing = [];
+  all('[data-link]').forEach(function (a) {
+    var key = a.getAttribute('data-link'), url = LINKS[key];
+    if (url) {
+      a.setAttribute('href', key === 'email' ? 'mailto:' + url : url);
+      if (key === 'email') { a.removeAttribute('target'); a.removeAttribute('rel'); }
+    } else {
+      a.removeAttribute('href');
+      a.removeAttribute('target');
+      a.classList.add('is-pending');
+      a.setAttribute('role', 'link');
+      a.setAttribute('aria-disabled', 'true');
+      a.setAttribute('title', 'Link not added yet');
+      if (missing.indexOf(key) === -1) missing.push(key);
+    }
+  });
+  if (missing.length && window.console && console.info) {
+    console.info('[portfolio] Links still to add in LINKS:', missing.join(', '));
+  }
+
+  /* =======================================================================
+     3. THEME (dark by default; the visitor's choice is remembered)
+     ======================================================================= */
+  var root = document.documentElement, themeMeta = $('#themeColorMeta');
+  var THEME_COLORS = { dark: '#0A141C', light: '#F3F7F9' };
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    if (themeMeta) themeMeta.setAttribute('content', THEME_COLORS[t]);
+    var btn = $('#themeBtn');
+    if (btn) btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    document.dispatchEvent(new CustomEvent('themechange'));
+  }
+  applyTheme(root.getAttribute('data-theme') || 'dark');
+  $('#themeBtn').addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('ai-portfolio-theme', next); } catch (e) {}
+  });
+
+  /* =======================================================================
+     4. NAVIGATION: scrolled state, progress line, mobile menu
+     ======================================================================= */
+  var nav = $('#nav'), bar = $('.progress span');
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var menu = $('#menu'), menuBtn = $('#menuBtn');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  menuBtn.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  // Highlight the nav link for the section in view (case study + AI work count as "Projects")
+  var navMap = { about: 'about', skills: 'skills', projects: 'projects', 'case-study': 'projects', 'ai-work': 'projects', github: 'projects', journey: 'journey', contact: 'contact' };
+  var navLinks = {};
+  all('.nav__links a[href^="#"]').forEach(function (a) { navLinks[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var target = navMap[en.target.id];
+        Object.keys(navLinks).forEach(function (k) {
+          if (k === target) navLinks[k].setAttribute('aria-current', 'true'); else navLinks[k].removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(navMap).forEach(function (id) { var el = document.getElementById(id); if (el) secObs.observe(el); });
+
+    // Case study side navigation
+    var csLinks = {};
+    all('.cs__nav a').forEach(function (a) { csLinks[a.getAttribute('href').slice(1)] = a; });
+    var csObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        Object.keys(csLinks).forEach(function (k) { csLinks[k].classList.toggle('on', k === en.target.id); });
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    Object.keys(csLinks).forEach(function (id) { var el = document.getElementById(id); if (el) csObs.observe(el); });
+  }
+
+  // Pending links should not jump the page
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a.is-pending');
+    if (a) e.preventDefault();
+  });
+
+  /* =======================================================================
+     5. HERO DOT FIELD
+        A grid of dots that drifts gently and pushes away from the pointer,
+        lighting up in teal near it. Pauses when off-screen or hidden.
+     ======================================================================= */
+  (function dotField() {
+    var hero = $('.hero'), canvas = $('#dots');
+    if (!hero || !canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    var GAP = 30, R = 140, w = 0, h = 0, raf = 0, running = false, visible = true;
+    var ptr = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
+    var touch = window.matchMedia('(hover: none)').matches;
+    var base = '', hot = '';
+
+    function readColors() {
+      var cs = getComputedStyle(root);
+      base = cs.getPropertyValue('--dot').trim();
+      hot = cs.getPropertyValue('--dot-hot').trim();
+    }
+    function size() {
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      w = hero.clientWidth; h = hero.clientHeight;
+      canvas.width = w * d; canvas.height = h * d;
+      ctx.setTransform(d, 0, 0, d, 0, 0);
+      draw(performance.now());
+    }
+    function draw(t) {
+      var s = reduced ? 0 : t * 0.001, cols = Math.ceil(w / GAP) + 1, rows = Math.ceil(h / GAP) + 1, i, j;
+      ctx.clearRect(0, 0, w, h);
+      if (touch && !reduced) { ptr.tx = w * (0.55 + 0.35 * Math.sin(s * 0.35)); ptr.ty = h * (0.5 + 0.3 * Math.sin(s * 0.5 + 1)); }
+      ptr.x += (ptr.tx - ptr.x) * 0.12; ptr.y += (ptr.ty - ptr.y) * 0.12;
+      for (i = 0; i < cols; i++) {
+        for (j = 0; j < rows; j++) {
+          var x = i * GAP + Math.cos(j * 0.35 + s * 0.7) * 2;
+          var y = j * GAP + Math.sin(i * 0.35 + s * 0.8) * 3;
+          var dx = x - ptr.x, dy = y - ptr.y, d = Math.sqrt(dx * dx + dy * dy), n = 0;
+          if (!reduced && d < R) { n = 1 - d / R; n = n * n * (3 - 2 * n); x += dx / (d || 1) * n * 14; y += dy / (d || 1) * n * 14; }
+          ctx.fillStyle = n > 0.25 ? hot : base;
+          ctx.globalAlpha = n > 0.25 ? 0.35 + 0.65 * n : 1;
+          ctx.beginPath(); ctx.arc(x, y, 1.3 + n * 2.2, 0, 6.2832); ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+    function loop(t) { if (!running) return; draw(t); raf = requestAnimationFrame(loop); }
+    function wake() { if (reduced || running || !visible || document.hidden) return; running = true; raf = requestAnimationFrame(loop); }
+    function halt() { running = false; cancelAnimationFrame(raf); }
+
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;
+      var r = hero.getBoundingClientRect(); ptr.tx = e.clientX - r.left; ptr.ty = e.clientY - r.top;
+    });
+    hero.addEventListener('pointerleave', function () { ptr.tx = ptr.ty = -9999; });
+    document.addEventListener('visibilitychange', function () { document.hidden ? halt() : wake(); });
+    document.addEventListener('themechange', function () { readColors(); draw(performance.now()); });
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 120); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { visible = e[0].isIntersecting; visible ? wake() : halt(); }).observe(hero);
+    }
+    readColors(); size(); wake();
+  })();
+})();
+</script>
+</body>
+</html>
